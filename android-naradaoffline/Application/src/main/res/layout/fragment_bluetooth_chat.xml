@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New Button"
-                android:id="@+id/button" />
+                android:id="@+id/button_send" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -80,11 +80,6 @@
             android:layout_gravity="bottom"
             android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/button_send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/send" />
     </LinearLayout>
 
 </LinearLayout>
