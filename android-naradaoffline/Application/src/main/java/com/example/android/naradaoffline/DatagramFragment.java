@@ -227,22 +227,24 @@ public class DatagramFragment extends Fragment {
      * @param message A string of text to send.
      */
     private void sendMessage(String message) {
-        // Check that we're actually connected before trying anything
-        if (mChatService.getState() != BluetoothDatagramService.STATE_CONNECTED) {
-            Toast.makeText(getActivity(), R.string.not_connected, Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // Check that there's actually something to send
-        if (message.length() > 0) {
-            // Get the message bytes and tell the BluetoothDatagramService to write
-            byte[] send = message.getBytes();
-            mChatService.write(send);
-
-            // Reset out string buffer to zero and clear the edit text field
-            mOutStringBuffer.setLength(0);
-            mOutEditText.setText(mOutStringBuffer);
-        }
+//        // Check that we're actually connected before trying anything
+//        if (mChatService.getState() != BluetoothDatagramService.STATE_CONNECTED) {
+//            Toast.makeText(getActivity(), R.string.not_connected, Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//
+//        // Check that there's actually something to send
+//        if (message.length() > 0) {
+//            // Get the message bytes and tell the BluetoothDatagramService to write
+//            byte[] send = message.getBytes();
+//            mChatService.write(send);
+//
+//            // Reset out string buffer to zero and clear the edit text field
+//            mOutStringBuffer.setLength(0);
+//            mOutEditText.setText(mOutStringBuffer);
+//        }
+        DatagramRequest d = new DatagramRequest(DatagramRequestType.GET_NEWSPAPER, "test");
+        sendDatagramRequest(d);
     }
 
     /**
@@ -353,6 +355,8 @@ public class DatagramFragment extends Fragment {
                     byte[] readBuf = (byte[]) msg.obj;
                     // construct a string from the valid bytes in the buffer
                     String readMessage = new String(readBuf, 0, msg.arg1);
+                    DatagramRequest req = gson.fromJson(readMessage, DatagramRequest.class);
+                    Log.d(TAG, "Got a datagram request of type " + req.mType.name());
                     mConversationArrayAdapter.add(mConnectedDeviceName + ":  " + readMessage);
                     break;
                 case Constants.MESSAGE_DEVICE_NAME:
