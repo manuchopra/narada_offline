@@ -18,15 +18,21 @@ package com.example.android.naradaoffline;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.text.InputType;
+import android.util.Base64;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,8 +42,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,11 +66,20 @@ public class DatagramFragment extends Fragment {
     private static final int REQUEST_CONNECT_DEVICE_SECURE = 1;
     private static final int REQUEST_CONNECT_DEVICE_INSECURE = 2;
     private static final int REQUEST_ENABLE_BT = 3;
+    private String mText = "";
+    private String mEmail = "";
 
     // Layout Views
     private ListView mConversationView;
     private EditText mOutEditText;
-    private Button mSendButton;
+    private ImageButton mGetNewsPaper;
+    private ImageButton mGetEmail;
+    private ImageButton mWhatsapp;
+    private ImageButton mSendEmail;
+    private ImageButton mGetAlert;
+
+    public Context cont;
+
 
     //Datagram Enums
     public enum DatagramRequestType {GET_NEWSPAPER, GET_NEW_EMAILS, SEND_WHATSAPP_MSG, SEND_EMAIL, GET_ALERTS}
@@ -72,12 +88,54 @@ public class DatagramFragment extends Fragment {
 
     public enum DatagramError {BAD_REQUEST, RECIPIENT_NO_EXIST, SENDER_REFUSED}
 
-    private class DatagramRequest {
-        DatagramRequestType mType;
+    private class DatagramResponse {
+        DatagramResponseType type;
+        String mDeviceName;
         String mRequest;
-        public DatagramRequest(DatagramRequestType type, String request) {
-            mType = type;
-            mRequest = request;
+        //newspaper data
+        String mNewspaperHtml;
+
+        public DatagramResponse(DatagramResponseType type, String newspaperHtml, String deviceName) {
+            this.type = type;
+            mDeviceName = deviceName;
+            mNewspaperHtml = Base64.encodeToString(newspaperHtml.getBytes(), Base64.NO_WRAP);
+        }
+
+        //EMAIL TYPE DATAGRAM
+//        public DatagramResponse(DatagramRequestType type, String deviceName, String from, String to, String body) {
+//            this.type = type;
+//            this.mDeviceName = deviceName;
+//            mEmailFrom = from;
+//            mEmailTo = to;
+//            mEmailBody = body;
+//        }
+
+        public String readNewspaperHtml() {
+            return new String(Base64.decode(mNewspaperHtml, Base64.NO_WRAP));
+        }
+    }
+
+    private class DatagramRequest {
+        DatagramRequestType type;
+        String mDeviceName;
+        String mRequest;
+        //email data
+        String mEmailFrom;
+        String mEmailTo;
+        String mEmailBody;
+
+        public DatagramRequest(DatagramRequestType type, String deviceName) {
+            this.type = type;
+            mDeviceName = deviceName;
+        }
+
+        //EMAIL TYPE DATAGRAM
+        public DatagramRequest(DatagramRequestType type, String deviceName, String from, String to, String body) {
+            this.type = type;
+            this.mDeviceName = deviceName;
+            mEmailFrom = from;
+            mEmailTo = to;
+            mEmailBody = body;
         }
     }
 
@@ -171,15 +229,47 @@ public class DatagramFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         //mConversationView = (ListView) view.findViewById(R.id.in);
-        mOutEditText = (EditText) view.findViewById(R.id.edit_text_out);
-        mSendButton = (Button) view.findViewById(R.id.button_send);
+        mGetNewsPaper = (ImageButton) view.findViewById(R.id.button_news);
+        mGetEmail = (ImageButton) view.findViewById(R.id.button_email);
+        mWhatsapp = (ImageButton) view.findViewById(R.id.button_whatsapp);
+        mSendEmail = (ImageButton) view.findViewById(R.id.button_email3);
+        mGetAlert = (ImageButton) view.findViewById(R.id.button_alert);
     }
+
+
+    protected final void sendEmail(DatagramRequest data) {
+        if (data.type != DatagramRequestType.SEND_EMAIL) {
+            Log.w(TAG, "This datagram is actually of type " + data.type.name());
+        }
+        Log.i("Send email", "");
+
+        String[] TO = {data.mEmailTo};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+
+
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your Datagram");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, data.mEmailBody);
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            Log.i("Finished sending email...", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+//            Toast.makeText(MainActivity.this,
+//            "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+
 
     /**
      * Set up the UI and background operations for chat.
      */
     private void setupChat() {
-        Log.d(TAG, "setupChat()");
+        Log.d(TAG);
 
         // Initialize the array adapter for the conversation thread
         mConversationArrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.message);
@@ -187,20 +277,80 @@ public class DatagramFragment extends Fragment {
         //mConversationView.setAdapter(mConversationArrayAdapter);
 
         // Initialize the compose field with a listener for the return key
-        mOutEditText.setOnEditorActionListener(mWriteListener);
+//        mOutEditText.setOnEditorActionListener(mWriteListener);
 
         // Initialize the send button with a listener that for click events
-        mSendButton.setOnClickListener(new View.OnClickListener() {
+
+
+
+        mGetNewsPaper.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Send a message using content of the edit text widget
                 View view = getView();
                 if (null != view) {
-                    TextView textView = (TextView) view.findViewById(R.id.edit_text_out);
-                    String message = textView.getText().toString();
-                    sendMessage(message);
+
+//                    TextView textView = (TextView) view.findViewById(R.id.edit_text_out);
+                    DatagramRequest d = new DatagramRequest(DatagramRequestType.GET_NEWSPAPER, mConnectedDeviceName);
+                    sendDatagramRequest(d);
                 }
             }
         });
+
+        // Initialize the send button with a listener that for click events
+        mGetEmail.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Send a message using content of the edit text widget
+                View view = getView();
+                if (null != view) {
+//                    TextView textView = (TextView) view.findViewById(R.id.edit_text_out);
+
+                    Log.i(TAG, "button clicked");
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(DatagramFragment.this.getContext());
+                    builder.setTitle("Write your email here");
+
+                    LinearLayout layout = new LinearLayout(getContext());
+                    layout.setOrientation(LinearLayout.VERTICAL);
+
+// Set up the input
+                    final EditText email = new EditText(DatagramFragment.this.getContext());
+                    email.setHint("Recipient e-mail address");
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                    email.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                    layout.addView(email);
+                    final EditText input = new EditText(DatagramFragment.this.getContext());
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                    input.setHint("Type your e-mail here");
+                    input.setInputType(InputType.TYPE_CLASS_TEXT);
+                    layout.addView(input);
+
+                    builder.setView(layout);
+// Set up the buttons
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            mEmail = email.getText().toString();
+                            mText = input.getText().toString();
+                            DatagramRequest d = new DatagramRequest(DatagramRequestType.SEND_EMAIL, mConnectedDeviceName, "", mEmail, mText);
+                            sendDatagramRequest(d);
+
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+
+                    builder.show();
+
+                }
+            }
+        });
+
+
+
 
         // Initialize the BluetoothDatagramService to perform bluetooth connections
         mChatService = new BluetoothDatagramService(getActivity(), mHandler);
@@ -226,26 +376,6 @@ public class DatagramFragment extends Fragment {
      *
      * @param message A string of text to send.
      */
-    private void sendMessage(String message) {
-//        // Check that we're actually connected before trying anything
-//        if (mChatService.getState() != BluetoothDatagramService.STATE_CONNECTED) {
-//            Toast.makeText(getActivity(), R.string.not_connected, Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//
-//        // Check that there's actually something to send
-//        if (message.length() > 0) {
-//            // Get the message bytes and tell the BluetoothDatagramService to write
-//            byte[] send = message.getBytes();
-//            mChatService.write(send);
-//
-//            // Reset out string buffer to zero and clear the edit text field
-//            mOutStringBuffer.setLength(0);
-//            mOutEditText.setText(mOutStringBuffer);
-//        }
-        DatagramRequest d = new DatagramRequest(DatagramRequestType.GET_NEWSPAPER, "test");
-        sendDatagramRequest(d);
-    }
 
     /**
      * Sends a message.
@@ -258,6 +388,7 @@ public class DatagramFragment extends Fragment {
             return;
         }
 
+        Log.i(TAG, "sending datagram");
         byte[] send = gson.toJson(request).getBytes();
         mChatService.write(send);
 
@@ -272,21 +403,6 @@ public class DatagramFragment extends Fragment {
 //            mOutEditText.setText(mOutStringBuffer);
 //        }
     }
-
-    /**
-     * The action listener for the EditText widget, to listen for the return key
-     */
-    private TextView.OnEditorActionListener mWriteListener
-            = new TextView.OnEditorActionListener() {
-        public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
-            // If the action is a key-up event on the return key, send the message
-            if (actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_UP) {
-                String message = view.getText().toString();
-                sendMessage(message);
-            }
-            return true;
-        }
-    };
 
     /**
      * Updates the status on the action bar.
@@ -355,8 +471,11 @@ public class DatagramFragment extends Fragment {
                     byte[] readBuf = (byte[]) msg.obj;
                     // construct a string from the valid bytes in the buffer
                     String readMessage = new String(readBuf, 0, msg.arg1);
+
+                    Log.i(TAG, "Message is: " + readMessage.length());
                     DatagramRequest req = gson.fromJson(readMessage, DatagramRequest.class);
-                    Log.d(TAG, "Got a datagram request of type " + req.mType.name());
+
+                    if(req.type == DatagramRequestType.SEND_EMAIL) sendEmail(req);
                     mConversationArrayAdapter.add(mConnectedDeviceName + ":  " + readMessage);
                     break;
                 case Constants.MESSAGE_DEVICE_NAME:
@@ -398,7 +517,7 @@ public class DatagramFragment extends Fragment {
                     setupChat();
                 } else {
                     // User did not enable Bluetooth or an error occurred
-                    Log.d(TAG, "BT not enabled");
+                    Log.d(TAG);
                     Toast.makeText(getActivity(), R.string.bt_not_enabled_leaving,
                             Toast.LENGTH_SHORT).show();
                     getActivity().finish();

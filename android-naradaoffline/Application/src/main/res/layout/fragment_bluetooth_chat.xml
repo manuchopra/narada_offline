@@ -17,69 +17,88 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical" >
+    android:baselineAligned="false"
+    android:orientation="vertical">
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_news"
+        android:src="@drawable/img1"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:layout_margin="5dp" />
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_email"
+        android:src="@drawable/img4"
+        android:background="@android:color/transparent"
+        android:layout_margin="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="3dp" />
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_whatsapp"
+        android:src="@drawable/img3"
+        android:layout_margin="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="3dp"
+        android:background="@android:color/transparent" />
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_email3"
+        android:src="@drawable/img2"
+        android:background="@android:color/transparent"
+        android:layout_margin="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="3dp" />
 
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollView"
-        android:layout_weight="1" >
+        android:id="@+id/scrollView">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button_send" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button2" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button3" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button4" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button5" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button6" />
         </LinearLayout>
     </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <EditText
-            android:id="@+id/edit_text_out"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="1" />
+        android:orientation="horizontal"
+        android:label="Apple">
 
     </LinearLayout>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_alert"
+        android:src="@drawable/img5"
+        android:layout_margin="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="3dp"
+        android:background="@android:color/transparent" />
 
 </LinearLayout>

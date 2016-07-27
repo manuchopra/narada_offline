@@ -16,7 +16,7 @@
 -->
 
 <resources>
-    <string name="app_name">BluetoothChat</string>
+    <string name="app_name">Narada (offline)</string>
     <string name="intro_message">
         <![CDATA[
         

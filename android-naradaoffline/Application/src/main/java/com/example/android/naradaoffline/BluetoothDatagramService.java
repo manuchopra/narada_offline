@@ -86,7 +86,7 @@ public class BluetoothDatagramService {
      */
     private synchronized void updateUserInterfaceTitle() {
         mState = getState();
-        Log.d(TAG, "updateUserInterfaceTitle() " + state + " -> " + mState);
+        Log.d(TAG);
         state = mState;
 
         // Give the new state to the Handler so the UI Activity can update
@@ -105,7 +105,7 @@ public class BluetoothDatagramService {
      * session in listening (server) mode. Called by the Activity onResume()
      */
     public synchronized void start() {
-        Log.d(TAG, "start");
+        Log.d(TAG);
 
         // Cancel any thread attempting to make a connection
         if (mConnectThread != null) {
@@ -139,7 +139,7 @@ public class BluetoothDatagramService {
      * @param secure Socket Security type - Secure (true) , Insecure (false)
      */
     public synchronized void connect(BluetoothDevice device, boolean secure) {
-        Log.d(TAG, "connect to: " + device);
+        Log.d(TAG);
 
         // Cancel any thread attempting to make a connection
         if (mState == STATE_CONNECTING) {
@@ -170,7 +170,7 @@ public class BluetoothDatagramService {
      */
     public synchronized void connected(BluetoothSocket socket, BluetoothDevice
             device, final String socketType) {
-        Log.d(TAG, "connected, Socket Type:" + socketType);
+        Log.d(TAG);
 
         // Cancel the thread that completed the connection
         if (mConnectThread != null) {
@@ -212,7 +212,7 @@ public class BluetoothDatagramService {
      * Stop all threads
      */
     public synchronized void stop() {
-        Log.d(TAG, "stop");
+        Log.d(TAG);
 
         if (mConnectThread != null) {
             mConnectThread.cancel();
@@ -325,8 +325,7 @@ public class BluetoothDatagramService {
         }
 
         public void run() {
-            Log.d(TAG, "Socket Type: " + mSocketType +
-                    "BEGIN mAcceptThread" + this);
+            Log.d(TAG);
             setName("AcceptThread" + mSocketType);
 
             BluetoothSocket socket = null;
@@ -370,7 +369,7 @@ public class BluetoothDatagramService {
         }
 
         public void cancel() {
-            Log.d(TAG, "Socket Type" + mSocketType + "cancel " + this);
+            Log.d(TAG);
             try {
                 mmServerSocket.close();
             } catch (IOException e) {
@@ -464,7 +463,7 @@ public class BluetoothDatagramService {
         private final OutputStream mmOutStream;
 
         public ConnectedThread(BluetoothSocket socket, String socketType) {
-            Log.d(TAG, "create ConnectedThread: " + socketType);
+            Log.d(TAG);
             mmSocket = socket;
             InputStream tmpIn = null;
             OutputStream tmpOut = null;

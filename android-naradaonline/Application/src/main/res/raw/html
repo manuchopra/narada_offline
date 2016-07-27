@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=UTF-8>
+    <title>Newspaper</title>
+    <style type=text/css>body{font-family:'Palatino Linotype',serif;font-size:14px;color:#2f2f2f;background-color:#f9f7f1}header{font-family:'Palatino Linotype',serif;font-weight:900;font-size:80px;text-transform:uppercase;display:inline-block;line-height:72px;margin-bottom:20px}p{margin-top:0;margin-bottom:20px}.head{text-align:center;position:relative}.subhead{text-transform:uppercase;border-bottom:2px solid #2f2f2f;border-top:2px solid #2f2f2f;padding:12px 0 12px 0}.weatherforcastbox{position:relative;width:12%;left:10px;border:3px double #2f2f2f;padding:10px 15px 10px 15px;line-height:20px;display:inline-block;margin:0 50px 20px -360px}.content{font-size:0;line-height:0;word-spacing:-.31em;display:inline-block;margin:30px 2% 0 2%}.collumn{font-size:14px;line-height:20px;width:17.5%;display:inline-block;padding:0 1% 0 1%;vertical-align:top;margin-bottom:50px;-webkit-transition:all .7s;transition:all .7s}.collumn+.collumn{border-left:1px solid #2f2f2f}.collumn .headline{text-align:center;line-height:normal;font-family:'Georgia',serif;display:block;margin:0 auto}.collumn .headline.hl1{font-weight:700;font-size:30px;text-transform:uppercase;padding:10px 0 10px 0}.collumn .headline.hl2{font-weight:400;font-style:italic;font-size:24px;box-sizing:border-box;padding:10px 0 10px 0}.collumn .headline.hl2:before{border-top:1px solid #2f2f2f;content:'';width:100px;height:7px;display:block;margin:0 auto}.collumn .headline.hl2:after{border-bottom:1px solid #2f2f2f;content:'';width:100px;height:13px;display:block;margin:0 auto}.collumn .headline.hl3{font-weight:400;font-style:italic;font-size:36px;box-sizing:border-box;padding:10px 0 10px 0}.collumn .headline.hl4{font-weight:700;font-size:12px;box-sizing:border-box;padding:10px 0 10px 0}.collumn .headline.hl4:before{border-top:1px solid #2f2f2f;content:'';width:100px;height:7px;display:block;margin:0 auto}.collumn .headline.hl4:after{border-bottom:1px solid #2f2f2f;content:'';width:100px;height:10px;display:block;margin:0 auto}.collumn .headline.hl5{font-weight:400;font-size:42px;text-transform:uppercase;font-style:italic;box-sizing:border-box;padding:10px 0 10px 0}.collumn .headline.hl6{font-weight:400;font-size:18px;box-sizing:border-box;padding:10px 0 10px 0}.collumn .headline.hl6:before{border-top:1px solid #2f2f2f;content:'';width:100px;height:7px;display:block;margin:0 auto}.collumn .headline.hl6:after{border-bottom:1px solid #2f2f2f;content:'';width:100px;height:10px;display:block;margin:0 auto}.collumn .headline.hl7{font-weight:700;font-size:12px;box-sizing:border-box;display:block;padding:10px 0 10px 0}.collumn .headline.hl8{font-weight:700;font-size:12px;box-sizing:border-box;padding:10px 0 10px 0}.collumn .headline.hl9{font-weight:700;font-size:12px;box-sizing:border-box;padding:10px 0 10px 0}.collumn .headline.hl10{font-weight:700;font-size:12px;box-sizing:border-box;padding:10px 0 10px 0}.collumn .citation{font-family:'Palatino Linotype',serif;font-size:36px;line-height:44px;text-align:center;font-weight:400;display:block;margin:40px 0 40px 0;-webkit-font-feature-settings:"liga","dlig";font-feature-settings:"liga","dlig"}.collumn .citation:before{border-top:1px solid #2f2f2f;content:'';width:100px;height:16px;display:block;margin:0 auto}.collumn .citation:after{border-bottom:1px solid #2f2f2f;content:'';width:100px;height:16px;display:block;margin:0 auto}.collumn .figure{margin:0 0 20px}.collumn .figcaption{font-style:italic;font-size:12px}.media{-webkit-filter:sepia(80%) contrast(1) opacity(0.8);filter:sepia(80%) grayscale(1) contrast(1) opacity(0.8);mix-blend-mode:multiply;width:100%}@media only all and (max-width:1300px){.weatherforcastbox{display:none}}@media only all and (max-width:1200px){.collumn{width:31%}}@media only all and (max-width:900px){.collumn{width:47%}}@media only all and (max-width:600px){.collumn{width:100%}.collumn+.collumn{border-left:none;border-bottom:1px solid #2f2f2f}header{max-width:320px;font-size:60px;line-height:54px;overflow:hidden}}</style>
+</head>
+<body>
+<html>
+<head>
+    <link rel=stylesheet href=styles/newspaper.css>
+    <title>Newspaper Demo</title>
+    <meta name=viewport content="width=device-width">
+</head>
+<body>
+<div class=head>
+    <div class=headerobjectswrapper>
+        <div class=weatherforcastbox><span style=font-style:italic>Weather forcast for the next 24 hours: Plenty of Sunshine</span><br><span>Wind: 7km/h SSE; Ther: 21Â°C; Hum: 82%</span></div>
+        <header>Vigyan Times</header>
+    </div>
+    <div class=subhead>Microsoft Research, India - 7 pages - July 28th 2016</div>
+</div>
+<div class=content>
+    <div class=collumns>
+        <div class=collumn><div class=head><span class="headline hl1">Google to add 'Potholes' feature in Google Maps
+in Bangalore</span><p></p></div>
+            <p>
+                Bengaluru: Google has announced to add â€˜Potholesâ€™ feature in the â€˜Mapsâ€™ app just like â€˜Trafficâ€™ and â€˜Public Transitâ€™. Google spoke person informed us that this new feature will be available in next release.
+                <br> <br>
+                Initially this feature will be available only in Bengaluru city and further it will extend to other cities. Google also said that, it will use advance GPS, GIS technology, Weather information to locate and predict potholes on road.
+                <br> <br>
+                Google is in talk with government departments (like PWD,BDA, BBMP) to fetch data like â€˜What type of material usedâ€™, â€˜Last pothole fixedâ€™ and so on. This would help in predicting if citizens can expect more potholes en route.
+                <br> <br>
+                Just like colors in â€˜Trafficâ€™ feature, same will added in â€˜Potholesâ€™:
+                The colors indicate the â€˜Number of Potholesâ€™ on the road.
+                Green means there are no potholes
+                Orange means there are medium number of potholes
+                Red means â€˜Road on potholesâ€™. The more red, the more number of potholes
+                In Turn-by-Turn Navigation it would show â€˜5 min slower due to more potholesâ€™.
+                <br> <br>
+                Hearing this motorist Chetan Murthy from Bengaluru is very happy. Speaking to Faking News he said, â€œWhen I checked Google maps, all I could see were red dots on the road which I was supposed to take. I wasted around an hour just figuring out an alternate route. But thanks to this new feature, finally I can know which road to take, which will also help in minimizing maintenance cost of my bike.â€
+                <br> <br>
+                Sachin Wagale from Mumbai said to FN that he will be waiting for this feature to be supported for Mumbai city. He also added that Google should add 3D model view to show the depth of the potholes.
+                <br> <br>
+                â€œIn rainy season these potholes are filled with water, it becomes difficult to identify if there is any road left in between the water filled potholes,â€ he said.
+            </p>
+        </div>
+        <div class=collumn>
+            <div class=head><span class="headline hl3">New Uber Update Allows Users To File Lawsuit Against Company Directly In App </span><p><span class="headline hl6">Customers Elated</span></p></div>
+            <p>
+                SAN FRANCISCOâ€”In a move designed to streamline the productâ€™s interface and facilitate one of the more common interactions between customers and the ride-sharing service, Uber announced Wednesday that its newest update would allow users to file a lawsuit against the company from directly within the app.
+                <br> <br>
+                â€œWeâ€™ve listened to the community, and weâ€™re excited to introduce a feature that will make bringing litigation against usâ€”whether for sexual harassment, racial profiling, or aggravated assaultâ€”as quick and easy as hailing a ride,â€ said Uber co-founder and CEO Travis Kalanick, demonstrating the appâ€™s new â€œSue Usâ€ button, conveniently located in the main menu. â€œThe app already contains all your biographical information, which integrates with GPS data to tell you how long it will take for the case to be heard, as well as the estimated cost.
+                <br> <br>
+                It also features a helpful and intuitive on-screen display that allows you to track your lawsuitâ€™s progress all the way through the courts.â€ Kalanick added that in the event a plaintiff loses their case, Uber would automatically recoup its legal fees from the userâ€™s preferred debit or credit card. </p> </div>
+        <div class=collumn>
+            <div class=head><span class="headline hl1"> UNESCO declares that UNESCO doesnâ€™t declare anything
+</span><p><span class="headline hl4">by Patriotic Indian </span></p></div>
+            Paris: United Nations Educational, Scientific and Cultural Organization (UNESCO) have declared today that they donâ€™t declare anything. They clarified that they donâ€™t declare best national anthem, best PM or best religion. They had to come up with this declaration after a series of declarations in their name went viral recently.
+            <br>
+            <br>
+            This is not the first instance of a viral fake news involving UNESCO, since the invention of e-mail, Indians have been getting the mail that UNESCO declares Indian national anthem as the best national anthem in the world. This is the first email that greets 99% of Indian email users, even before Googleâ€™s welcome mail. Last month, another such â€œnewsâ€ went viral saying that UNESCO has declared Indian PM as the best PM in the world.
+            <br>
+            <br>
+            Meanwhile, a new WhatsApp message started circulating last night saying that UNESCO has declared Rajma-Chawal as the best food in the world. Sources say it may have originated in Punjab, India.
+            </p></div>
+        <div class=collumn><div class=head><span class="headline hl3">Man driving on Indian roads for 25 yrs shocked to hear that there are wrong and right sides for overtaking
+</span><p>
+            Chandigarh: 40 yrs old Amar Singh was shocked when he was issued a traffic challan yesterday for overtaking from the wrong side. Amar, who has been driving since he was in high school, had never even heard about such a rule earlier. He ended up in a long argument with the traffic constable over the matter.
+            <Br><Br>
+            The incident happened on the road dividing Sector 18 and 21 when Amar was returning from office in his car. Amar took the slow lane to get ahead of a vehicle in front of him and was immediately pulled over by the traffic constable. As per sources in the traffic police, it was the constableâ€™s first day on the job and that is why he was trying to implement every law.
+            <Br><Br>
+            â€œI am not paying this challan, I will fight it out in the court or maybe I will ask my wifeâ€™s maternal auntâ€™s brother-in-law to help me out. He is a police inspector; he will settle it for me. What is wrong side overtaking, there is only overtaking. I have been deliberately targeted by the traffic police here. I donâ€™t know the reason for it yet, once I find out the caste and political affiliations of the constable, I will know the exact reason behind this actionâ€, a fuming Amar told Faking News.
+            <Br>
+            <Br>
+            Furthermore he added, â€œI have been driving since I was a 15 yrs old when I asked my father, who was working in transport department at the time, to get me a Driving License. I have paid all sorts of fines but never have I been booked for wrong overtaking. The asshole even refused to take any bribe from me to settle the issue there and then. What was he trying to prove, that he is some Anna Hazare or something? Honest officials really inconvenience common people like us and strict action should be taken against him.â€
+            When we tried to get the version of the traffic constable, he refused to identify himself on record. On the condition of anonymity, he said, â€œMany colleagues have already scolded me saying that traffic will come to a standstill if we start fining people for every violation. I have been told to pick and choose from now on. Why donâ€™t they teach us such things during training?â€
+        </p>
+        </div> </div>
+        <div class=collumn><div class=head><span class="headline hl1"> Taylor Swift Goes Incognito in Local High School, Searching for Next Boyfriend </span><p><span class="headline hl4">by Kim K</span></p></div><p>
+            Taylor Swift has decided to return to school- but itâ€™s not just homework, books, and teachersâ€™ dirty looks for this pop star. Swift has hit the the halls of a local high school claritin online canada pharmacy in oversized shades and a baseball cap, searching for her next fling. While in the past Taylor has been linked to older men such as John Mayer and Jake Gyllenhaal, she has more recently succumbed to the nostalgic pull of her high school days by consorting with with eighteen-year-old Connor Kennedy and Harry Styles. Now that â€œHaylorâ€ has come to an end, Swift is once again cruising through school zones for a romantic encounter.
+            <bR><br>
+            A young male student who wishes to remain anonymous shared his harrowing story: â€œSo this random lady in a hat and sunglasses came up to me and asked me how old I was. I told her Iâ€™m almost 20 and she just turned around and walked away.â€
+            <bR><br>
+            School authorities eventually caught wind of a strange woman roaming the halls and Swift was caught and questioned. When asked what she was doing in the high school, she broke down and said, â€œI donâ€™t know! Last night I was sitting at home with some Ben & Jerry and I just remembered that Rihanna taught me that I could find love in a hopeless place, so I went to a high school. John and Jake hurt me really bad, but Connor was a sweetheart. Boys are so much nicer when theyâ€™re actually still boysâ€¦.â€
+        </p></div>
+    </div>
+</div>
+</body>
+</html>
